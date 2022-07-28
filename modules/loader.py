@@ -1,14 +1,3 @@
-import requests
-from requests_file import FileAdapter
-import pathlib
-
-curr_dir=pathlib.Path(__file__).parent.resolve()
-requests=requests.Session()
-requests.mount('file://', FileAdapter())
-dlmod_repo=f"file://{curr_dir}/dlmod.repo.json"
-dlmod_json=requests.get(dlmod_repo).json()
-
-
 
 class Module:
     group="loader"
@@ -31,8 +20,6 @@ class Module:
                     message.reply_text(f"[dlmod] module '{url}' error loading, module loaded")
                     continue
             message.reply_text(f"[dlmod] module '{url}' successful loading!")
-            dlmod_json.append(module_url)
-        open('dlmod.repo.json', 'w').write(str(dlmod_json))
 
     def rmmodcmd(self, bot, message, args):
         for url in args:
@@ -41,8 +28,6 @@ class Module:
                     message.reply_text(f"[rmmod] module '{url}' error unloading, module not loaded!")
                     continue
             message.reply_text(f"[rmmod] module '{url}' successful unloading!")
-            dlmod_json.pop(dlmod_json.index(module_url))
-        open('dlmod.repo.json', 'w').write(str(dlmod_json))
 
     def rlmodcmd(self,bot,message,args):
         for url in args:
