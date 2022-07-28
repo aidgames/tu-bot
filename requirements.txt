@@ -1,0 +1,3 @@
+pyrogram>=2.0.0
+requests>=2.0.0
+requests_file>=1.0.0

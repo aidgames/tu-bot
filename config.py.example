@@ -1,0 +1,5 @@
+CONFIG_API_ID=api id
+CONFIG_API_HASH="api hash"
+CONFIG_CUSTOM_REPOS_ENABLE=False
+#add if you enable custom repos
+CONFIG_CUSTOM_REPOS=[]
