@@ -2,6 +2,7 @@ import importlib.abc
 import requests
 from requests_file import FileAdapter
 import pathlib
+import os
 from config import CONFIG_CUSTOM_REPOS_ENABLE
 
 
@@ -10,9 +11,12 @@ curr_dir=pathlib.Path(__file__).parent.resolve()
 requests=requests.Session()
 requests.mount('file://', FileAdapter())
 
+files = [f for f in os.listdir('.') if os.path.isfile(f)]
+if "dlmod.repo.json" not in files:
+    open("dlmod.repo.json", "w+").write("[]")
+dlmod_repo=f"file://{curr_dir}/dlmod.repo.json"
 
-
-repos=['https://raw.githubusercontent.com/aidgames/tu-bot/master/modules/repo.json']
+repos=['https://raw.githubusercontent.com/aidgames/tu-bot/master/modules/repo.json', dlmod_repo]
 
 if CONFIG_CUSTOM_REPOS_ENABLE:
     try:
@@ -73,6 +77,7 @@ class Loader:
         for cmd in self.loaded.get(module_url):
             del self.commands.commands[cmd]
         del self.loaded[module_url]
+
 
 def setup(bot,commands):
     loader=Loader(bot, commands)
