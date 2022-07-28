@@ -12,7 +12,7 @@ requests.mount('file://', FileAdapter())
 
 
 
-repos=['https://raw.githubusercontent.com/aidgames/ti-bot/master/modules/repo.json']
+repos=['https://raw.githubusercontent.com/aidgames/tu-bot/master/modules/repo.json']
 
 if CONFIG_CUSTOM_REPOS_ENABLE:
     try:
